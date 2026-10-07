@@ -1,0 +1,39 @@
+[project]
+name = "heirloom"
+version = "0.1.0"
+description = "Multi-agent oral-history interviewer with layered memory"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.3",
+  "boto3>=1.34",
+  "tiktoken>=0.7",
+  "python-ulid>=2.7",
+  "rich>=13.7",
+  "numpy>=1.26",
+  "tenacity>=8.3",
+  "openai>=1.40",
+  "qdrant-client>=1.12",
+  "pinecone>=5.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "httpx>=0.27", "moto[server,dynamodb]>=5.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::DeprecationWarning:botocore.*", "ignore:Using `httpx`"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*", "scripts*"]
